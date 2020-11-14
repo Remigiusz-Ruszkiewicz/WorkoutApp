@@ -17,7 +17,7 @@ namespace workoutapp.Services
 
         public DataContext DbContext { get; }
 
-        public async Task<double> AddBodyFatCalculation(BodyFatCalculator bodyFatCalculator)
+        public async Task<BodyFatCalculator> AddBodyFatCalculation(BodyFatCalculator bodyFatCalculator)
         {
             bodyFatCalculator.Date = DateTime.Now;
             bodyFatCalculator.Id = Guid.NewGuid();
@@ -35,13 +35,12 @@ namespace workoutapp.Services
             bodyFatCalculator.LeanMass = bodyFatCalculator.Weight - bodyFatCalculator.FatMass;
             if (bodyFatCalculator.Save == false)
             {
-                return bf;
-                
+                return bodyFatCalculator; 
             }
             bodyFatCalculator.BodyFatPercentage = bf;
             DbContext.BodyFatCalculator.Add(bodyFatCalculator);
             await DbContext.SaveChangesAsync();
-            return bf;
+            return bodyFatCalculator;
         }
 
         public async Task<BodyMeasure> AddBodyMeasureAsync(BodyMeasure bodyMeasure)
