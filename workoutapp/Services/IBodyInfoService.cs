@@ -14,5 +14,8 @@ namespace workoutapp.Services
 
         Task<BodyMeasure> AddBodyMeasureAsync(BodyMeasure bodyMeasure);
         Task<ICollection<BodyMeasure>> GetAllBodyMeasuresAsync();
+
+        Task<double> AddBodyFatCalculation(BodyFatCalculator bodyFatCalculator);
+        Task<ICollection<BodyFatCalculator>> GetAllBodyFatCalculations();
     }
 }

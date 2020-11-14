@@ -7,14 +7,22 @@ namespace workoutapp.Models
 {
     public class BodyFatCalculator
     {
+        public Guid Id { get; set; }
+        public DateTime Date { get; set; }
         public bool Save { get; set; }
         public bool Gender { get; set; }
+        public int Age { get; set; }
         public int Height { get; set; }
-        public int Weight { get; set; }
-        public int Neck { get; set; }
-        public int Waist { get; set; }
-        public int Hip { get; set; }  //Woman
-        
+        public double Weight { get; set; }
+        public double Neck { get; set; }
+        public double Waist { get; set; }
+        public double Hip { get; set; }  //Woman
+        public double BodyFatPercentage { get; set; }
+        public double FatMass { get; set; }
+        public double LeanMass { get; set; }
 
-    }
+
+
+
+}
 }

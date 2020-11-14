@@ -16,6 +16,7 @@ namespace workoutapp.Data
         public DbSet<Exercise> exercises { get; set; }
         public DbSet<BMICalculator> BMIResults { get; set; }
         public DbSet<BodyMeasure> BodyMeasure { get; set; }
+        public DbSet<BodyFatCalculator> BodyFatCalculator { get; set; }
         
         //public DbSet<AccountsList> accountsLists { get; set; }
     }

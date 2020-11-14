@@ -24,6 +24,8 @@ namespace workoutapp.Contracts
             public const string BmiResultALL = Base + "BMI";
             public const string AddBodyMeasure = Base + "BodyMeasure";
             public const string GetAllBodyMeasures = Base + "BodyMeasure";
+            public const string AddBodyFatCalculation = Base + "BodyFatCalc";
+            public const string GetAllBodyFatCalculations = Base + "BodyFatCalc";
 
         }
     }

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using workoutapp.Data;
 
 namespace workoutapp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20201114190903_bodyfat")]
+    partial class bodyfat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,9 +52,6 @@ namespace workoutapp.Migrations
 
                     b.Property<int>("Age")
                         .HasColumnType("INTEGER");
-
-                    b.Property<double>("BodyFatPercentage")
-                        .HasColumnType("REAL");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");

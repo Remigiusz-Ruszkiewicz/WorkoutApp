@@ -47,5 +47,19 @@ namespace workoutapp.Controllers
             var measures = await BodyInfoService.GetAllBodyMeasuresAsync();
             return Ok(measures);
         }
+        [AllowAnonymous]
+        [HttpPost(ApiRoutes.BodyInfo.AddBodyFatCalculation)]
+        public async Task<IActionResult> AddBodyFatCalculation([FromBody] BodyFatCalculator bodyFatCalculator)
+        {
+            var bodyMeasureResult = await BodyInfoService.AddBodyFatCalculation(bodyFatCalculator);
+            return Ok(bodyMeasureResult);
+        }
+        [AllowAnonymous]
+        [HttpGet(ApiRoutes.BodyInfo.GetAllBodyFatCalculations)]
+        public async Task<IActionResult> GetAllBodyFatCalculations()
+        {
+            var bodyfat = await BodyInfoService.GetAllBodyFatCalculations();
+            return Ok(bodyfat);
+        }
     }
 }
