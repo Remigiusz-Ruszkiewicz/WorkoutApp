@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using workoutapp.Contracts;
+using workoutapp.Contracts.Request;
 using workoutapp.Models;
 using workoutapp.Services;
 
@@ -21,9 +22,9 @@ namespace workoutapp.Controllers
 
         [AllowAnonymous]
         [HttpPost(ApiRoutes.BodyInfo.BmiResult)]
-        public async Task<IActionResult> BmiResult([FromBody] BMICalculator BMICalculator)
+        public async Task<IActionResult> BmiResult([FromBody] BMIRequest BMIRequest)
         {
-            var bmiseresult = await BodyInfoService.BMIResultAsync(BMICalculator);
+            var bmiseresult = await BodyInfoService.BMIResultAsync(BMIRequest);
             return Ok(bmiseresult);
         }
         [AllowAnonymous]

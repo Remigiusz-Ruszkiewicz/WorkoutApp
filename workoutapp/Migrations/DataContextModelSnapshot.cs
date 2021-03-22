@@ -16,6 +16,55 @@ namespace workoutapp.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.9");
 
+            modelBuilder.Entity("VirtualDesk.Models.AccountsList", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EmailAdress")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsPrivate")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Pass")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PopPort")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PopServer")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("SmtpPort")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SmtpServer")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("accountsLists");
+                });
+
+            modelBuilder.Entity("VirtualDesk.Models.EmailAccountList", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("emailAccountLists");
+                });
+
             modelBuilder.Entity("workoutapp.Models.BMICalculator", b =>
                 {
                     b.Property<Guid>("Id")
@@ -30,9 +79,6 @@ namespace workoutapp.Migrations
 
                     b.Property<double>("Result")
                         .HasColumnType("REAL");
-
-                    b.Property<bool>("Save")
-                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Weight")
                         .HasColumnType("INTEGER");

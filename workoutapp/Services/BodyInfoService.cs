@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using workoutapp.Contracts.Request;
 using workoutapp.Data;
 using workoutapp.Models;
 
@@ -59,19 +60,22 @@ namespace workoutapp.Services
             return result;
         }
 
-        public async Task<double> BMIResultAsync(BMICalculator bMICalculator)
+        public async Task<double> BMIResultAsync(BMIRequest BMIRequest)
         {
-            bMICalculator.Date = DateTime.Now;
-            bMICalculator.Id = Guid.NewGuid();
-            double height = bMICalculator.Height;
-            var weight = bMICalculator.Weight;
+            BMICalculator calc = new BMICalculator();
+            calc.Date = DateTime.Now;
+            calc.Id = Guid.NewGuid();
+            double height = BMIRequest.height;
+            var weight = BMIRequest.weight;
+            calc.Weight = BMIRequest.weight;
+            calc.Height = BMIRequest.height;
             double Bmi = Math.Round((weight / ((height / 100) * (height / 100))), 1);
-            if (bMICalculator.Save == false)
+            if (BMIRequest.save == false)
             {
                return Bmi;
             }
-            bMICalculator.Result = Bmi;
-            DbContext.BMIResults.Add(bMICalculator);
+            calc.Result = Bmi;
+            DbContext.BMIResults.Add(calc);
             await DbContext.SaveChangesAsync();
             return Bmi;
         }

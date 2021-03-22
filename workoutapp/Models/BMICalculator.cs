@@ -9,7 +9,6 @@ namespace workoutapp.Models
     {
         public Guid Id { get; set; }
         public DateTime Date { get; set; }
-        public bool Save { get; set; }
         public int Weight { get; set; }
         public int Height { get; set; }
         public double Result { get; set; }

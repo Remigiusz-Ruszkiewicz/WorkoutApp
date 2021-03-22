@@ -9,8 +9,8 @@ using workoutapp.Data;
 namespace workoutapp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201114190903_bodyfat")]
-    partial class bodyfat
+    [Migration("20210322193307_new")]
+    partial class @new
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,9 +33,6 @@ namespace workoutapp.Migrations
                     b.Property<double>("Result")
                         .HasColumnType("REAL");
 
-                    b.Property<bool>("Save")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("Weight")
                         .HasColumnType("INTEGER");
 
@@ -52,6 +49,9 @@ namespace workoutapp.Migrations
 
                     b.Property<int>("Age")
                         .HasColumnType("INTEGER");
+
+                    b.Property<double>("BodyFatPercentage")
+                        .HasColumnType("REAL");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");

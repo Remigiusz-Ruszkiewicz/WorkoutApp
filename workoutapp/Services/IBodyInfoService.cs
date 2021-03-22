@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using workoutapp.Contracts.Request;
 using workoutapp.Models;
 
 namespace workoutapp.Services
 {
     public interface IBodyInfoService
     {
-        //int BMIResult(int height, int weight);
-        Task<double> BMIResultAsync(BMICalculator bMICalculator);
+        Task<double> BMIResultAsync(BMIRequest BMIRequest);
         Task<ICollection<BMICalculator>> BmiResultAllAsync();
 
         Task<BodyMeasure> AddBodyMeasureAsync(BodyMeasure bodyMeasure);

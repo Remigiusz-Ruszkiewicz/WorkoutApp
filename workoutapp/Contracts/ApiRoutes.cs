@@ -28,5 +28,27 @@ namespace workoutapp.Contracts
             public const string GetAllBodyFatCalculations = Base + "BodyFatCalc";
 
         }
+        public static class MailSender
+        {
+            //MailSend
+            public const string MailSend = Base + "MailSenderPost";
+            public const string MailSendFromContact = Base + "MailSenderSendFromList/{id}";
+            public const string MailSendByAccAndCont = Base + "MailSender/SendByAccount/{id}/{loginId}";
+            //MailGet
+            public const string MailGet = Base + "MailSenderGet";
+            public const string MailGetByAcc = Base + "MailSenderGet/{id}";
+            //Contacts
+            public const string AddContact = Base + "MailSender";
+            public const string GetAllContacts = Base + "MailSender";
+            public const string GetContactById = Base + "MailSender/{id}";
+            public const string UpdateContact = Base + "MailSender/{id}";
+            public const string DeleteContact = Base + "MailSender/{id}";
+            //Accounts
+            public const string AddAccount = Base + "MailSender/AddAccount";
+            public const string GetAllAccounts = Base + "MailSender/GetAllAccounts";
+            public const string GetAccountById = Base + "MailSender/GetAccountById/{id}";
+            public const string UpdateAccount = Base + "MailSender/UpdateAccount/{id}";
+            public const string DeleteAccount = Base + "MailSender/DeleteAccount/{id}";
+        }
     }
 }
