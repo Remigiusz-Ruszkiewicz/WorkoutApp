@@ -33,6 +33,7 @@ namespace workoutapp
             services.AddSwaggerGen();
             services.AddDbContext<DataContext>(options => options.UseSqlite("Data Source=Workout.db"));
             services.AddScoped<IExerciseService, ExerciseService>();
+            services.AddScoped<IProgressNotificationService, ProgressNotificationService>();
             services.AddScoped<IBodyInfoService, BodyInfoService>();
             services.AddScoped<IProgressNotificationService, ProgressNotificationService>();
             services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());

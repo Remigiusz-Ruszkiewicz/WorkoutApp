@@ -28,6 +28,11 @@ namespace workoutapp.Contracts
             public const string GetAllBodyFatCalculations = Base + "BodyFatCalc";
 
         }
+        public static class ProgressNotification
+        {
+            public const string SendMessage = Base + "ProgressSendMessage/{id}";
+            public const string SendMessages = Base + "ProgressSendMessages";
+        }
         public static class MailSender
         {
             //MailSend
