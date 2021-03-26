@@ -194,9 +194,38 @@ namespace workoutapp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("WorkoutId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("WorkoutId");
+
                     b.ToTable("exercises");
+                });
+
+            modelBuilder.Entity("workoutapp.Models.Workout", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Results")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("workout");
+                });
+
+            modelBuilder.Entity("workoutapp.Models.Exercise", b =>
+                {
+                    b.HasOne("workoutapp.Models.Workout", null)
+                        .WithMany("Exercises")
+                        .HasForeignKey("WorkoutId");
                 });
 #pragma warning restore 612, 618
         }

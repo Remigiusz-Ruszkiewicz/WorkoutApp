@@ -9,14 +9,63 @@ using workoutapp.Data;
 namespace workoutapp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210322193307_new")]
-    partial class @new
+    [Migration("20210326174242_workout")]
+    partial class workout
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.9");
+
+            modelBuilder.Entity("VirtualDesk.Models.AccountsList", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EmailAdress")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsPrivate")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Pass")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PopPort")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PopServer")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("SmtpPort")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SmtpServer")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("accountsLists");
+                });
+
+            modelBuilder.Entity("VirtualDesk.Models.EmailAccountList", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("emailAccountLists");
+                });
 
             modelBuilder.Entity("workoutapp.Models.BMICalculator", b =>
                 {
@@ -147,9 +196,38 @@ namespace workoutapp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("WorkoutId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("WorkoutId");
+
                     b.ToTable("exercises");
+                });
+
+            modelBuilder.Entity("workoutapp.Models.Workout", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Results")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("workout");
+                });
+
+            modelBuilder.Entity("workoutapp.Models.Exercise", b =>
+                {
+                    b.HasOne("workoutapp.Models.Workout", null)
+                        .WithMany("Exercises")
+                        .HasForeignKey("WorkoutId");
                 });
 #pragma warning restore 612, 618
         }

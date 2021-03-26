@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using workoutapp.Contracts.Requests;
 using workoutapp.Data;
 using workoutapp.Models;
 
@@ -17,12 +18,15 @@ namespace workoutapp.Services
 
         public DataContext Dbcontext { get; }
 
-        public async Task<Exercise> AddExerciseAsync(Exercise exercise)
+        public async Task<Exercise> AddExerciseAsync(ExerciseRequest exerciseRequest)
         {
-            exercise.Id = Guid.NewGuid();
-            Dbcontext.exercises.Add(exercise);
+            Exercise ex = new Exercise();
+            ex.Category =  exerciseRequest.Category;
+            ex.Name = exerciseRequest.Name;
+            ex.Id = Guid.NewGuid();
+            Dbcontext.exercises.Add(ex);
             await Dbcontext.SaveChangesAsync();
-            var exercisetoreturn = await GetExerciseByIdAsync(exercise.Id);
+            var exercisetoreturn = await GetExerciseByIdAsync(ex.Id);
             return exercisetoreturn;
         }
 

@@ -18,6 +18,15 @@ namespace workoutapp.Contracts
             public const string UpdateExercise = Base + "Workout/{id}";
             public const string DeleteExercise = Base + "Workout/{id}";
         }
+        public static class Workout
+        {
+            //Exercise
+            public const string AddWorkout = Base + "Workout1";
+            //public const string GetAllExercises = Base + "Workout";
+            public const string GetWorkoutById = Base + "Workout1/{id}";
+            //public const string UpdateExercise = Base + "Workout/{id}";
+            //public const string DeleteExercise = Base + "Workout/{id}";
+        }
         public static class BodyInfo
         {
             public const string BmiResult = Base + "BMI";

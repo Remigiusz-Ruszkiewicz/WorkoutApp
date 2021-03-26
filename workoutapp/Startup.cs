@@ -38,6 +38,7 @@ namespace workoutapp
             services.AddScoped<IProgressNotificationService, ProgressNotificationService>();
             services.AddSingleton<IEmailConfiguration>(Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>());
             services.AddScoped<IMailSenderService, MailSenderService>();
+            services.AddScoped<IWorkoutService, WorkoutService>();
             services.AddSwaggerGen(c =>
             {
 
