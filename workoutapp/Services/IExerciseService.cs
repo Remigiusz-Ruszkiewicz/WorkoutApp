@@ -9,7 +9,7 @@ namespace workoutapp.Services
 {
     public interface IExerciseService
     {
-        Task<Exercise> AddExerciseAsync(ExerciseRequest exerciseRequest);
+        Task<Exercise> AddExerciseAsync(Exercise exerciseRequest);
         Task<Exercise> EditExerciseAsync(Exercise exercise);
         Task<bool> DeleteExerciseAsync(Guid id);
         Task<ICollection<Exercise>> GetExercisesAsync();

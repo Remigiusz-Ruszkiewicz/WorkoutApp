@@ -9,8 +9,8 @@ using workoutapp.Data;
 namespace workoutapp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210326174242_workout")]
-    partial class workout
+    [Migration("20210410194257_new")]
+    partial class @new
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

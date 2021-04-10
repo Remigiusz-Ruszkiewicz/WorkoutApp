@@ -18,7 +18,7 @@ namespace workoutapp.Services
 
         public DataContext Dbcontext { get; }
 
-        public async Task<Exercise> AddExerciseAsync(ExerciseRequest exerciseRequest)
+        public async Task<Exercise> AddExerciseAsync(Exercise exerciseRequest)
         {
             Exercise ex = new Exercise();
             ex.Category =  exerciseRequest.Category;

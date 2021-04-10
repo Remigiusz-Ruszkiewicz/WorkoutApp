@@ -10,10 +10,10 @@ namespace workoutapp.Contracts.Requests
     {
         public WorkoutRequest()
         {
-            Exercises = new List<ExerciseRequest>();
+            Exercises = new List<Exercise>();
         }
         public DateTime Date { get; set; }
-        public List<ExerciseRequest> Exercises { get; set; }
+        public List<Exercise> Exercises { get; set; }
         public int Results { get; set; }
     }
 }

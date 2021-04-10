@@ -21,7 +21,7 @@ namespace workoutapp.Controllers
         public IExerciseService ExerciseService { get; }
         [AllowAnonymous]
         [HttpPost(ApiRoutes.Exercise.AddExercise)]
-        public async Task<IActionResult> AddExercise([FromBody] ExerciseRequest exerciseRequest)
+        public async Task<IActionResult> AddExercise([FromBody] Exercise exerciseRequest)
         {
             var exerciseresult = await ExerciseService.AddExerciseAsync(exerciseRequest);
             return Ok(exerciseresult);
