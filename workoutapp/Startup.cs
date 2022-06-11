@@ -44,7 +44,7 @@ namespace workoutapp
 
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Virtual Desk",
+                    Title = "Workout App",
                     Version = "v1",
                     Contact = new OpenApiContact
                     {

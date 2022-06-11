@@ -32,7 +32,7 @@ namespace workoutapp.Services
                 bf = 495 / (1.29579 - 0.35004 * Math.Log(bodyFatCalculator.Waist + bodyFatCalculator.Hip - bodyFatCalculator.Neck, 10) + 0.22100 * Math.Log(bodyFatCalculator.Height, 10)) - 450;
             }
             bf = Math.Round(bf, 1);
-            bodyFatCalculator.FatMass = Math.Round((bf/100 * bodyFatCalculator.Weight),1);
+            bodyFatCalculator.FatMass = Math.Round(bf/100 * bodyFatCalculator.Weight,1);
             bodyFatCalculator.LeanMass = bodyFatCalculator.Weight - bodyFatCalculator.FatMass;
             if (bodyFatCalculator.Save == false)
             {
@@ -62,14 +62,10 @@ namespace workoutapp.Services
 
         public async Task<double> BMIResultAsync(BMIRequest BMIRequest)
         {
-            BMICalculator calc = new BMICalculator();
-            calc.Date = DateTime.Now;
-            calc.Id = Guid.NewGuid();
+            BMICalculator calc = new() { Date = DateTime.Now, Id = Guid.NewGuid(), Height = BMIRequest.height , Weight = BMIRequest.weight };
             double height = BMIRequest.height;
             var weight = BMIRequest.weight;
-            calc.Weight = BMIRequest.weight;
-            calc.Height = BMIRequest.height;
-            double Bmi = Math.Round((weight / ((height / 100) * (height / 100))), 1);
+            double Bmi = Math.Round(weight / (height / 100 * (height / 100)), 1);
             if (BMIRequest.save == false)
             {
                return Bmi;

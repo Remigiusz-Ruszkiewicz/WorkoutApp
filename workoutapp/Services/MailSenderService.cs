@@ -104,8 +104,8 @@ namespace VirtualDesk.Services
                 emailClient.Connect(_emailConfiguration.PopServer, _emailConfiguration.PopPort, true);
                 emailClient.AuthenticationMechanisms.Remove("XOAUTH2");
                 emailClient.Authenticate(_emailConfiguration.PopUsername, _emailConfiguration.PopPassword);
-                List<EmailMessage> emails = new List<EmailMessage>();
-                for (int i = (emailClient.Count - 1); i >= emailClient.Count - number; i--)
+                List<EmailMessage> emails = new();
+                for (int i = emailClient.Count - 1; i >= emailClient.Count - number; i--)
                 {
                     var message = emailClient.GetMessage(i);
                     var emailMessage = new EmailMessage
@@ -193,8 +193,8 @@ namespace VirtualDesk.Services
                 emailClient.Connect(mail.PopServer, mail.PopPort, true);
                 emailClient.AuthenticationMechanisms.Remove("XOAUTH2");
                 emailClient.Authenticate(mail.EmailAdress, mail.Pass);
-                List<EmailMessage> emails = new List<EmailMessage>();
-                for (int i = (emailClient.Count - 1); i >= emailClient.Count - maxCount; i--)
+                List<EmailMessage> emails = new();
+                for (int i = emailClient.Count - 1; i >= emailClient.Count - maxCount; i--)
                 {
                     var message = emailClient.GetMessage(i);
                     var emailMessage = new EmailMessage

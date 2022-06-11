@@ -21,7 +21,5 @@ namespace workoutapp.Data
         public DbSet<EmailAccountList> emailAccountLists { get; set; }
         public DbSet<AccountsList> accountsLists { get; set; }
         public DbSet<Workout> workout { get; set; }
-
-        //public DbSet<AccountsList> accountsLists { get; set; }
     }
 }

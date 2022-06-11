@@ -27,7 +27,7 @@ namespace workoutapp.Services
 
         public async Task<bool> ProgressMessageAsync(Guid id)
         {
-            StreamReader text = new StreamReader("Sample.txt");
+            StreamReader text = new("Sample.txt");
             var mail = await DbContext.emailAccountLists.SingleOrDefaultAsync(x => x.Id == id);
             var message = new MimeMessage();
             message.To.Add(new MailboxAddress(mail.Name, mail.Address));
@@ -52,9 +52,9 @@ namespace workoutapp.Services
         public async Task<bool> ProgressMessagesAsync()
         {
             
-            StreamReader text = new StreamReader("Sample.txt");
+            StreamReader text = new("Sample.txt");
             var mail = await DbContext.emailAccountLists.ToListAsync();
-            InternetAddressList list = new InternetAddressList();
+            InternetAddressList list = new();
             for (int i = 0; i < mail.Count; i++)
             {
                 list.Add(new MailboxAddress(mail[i].Name,mail[i].Address));

@@ -20,7 +20,7 @@ namespace workoutapp.Services
 
         public async Task<Exercise> AddExerciseAsync(Exercise exerciseRequest)
         {
-            Exercise ex = new Exercise();
+            Exercise ex = new();
             ex.Category =  exerciseRequest.Category;
             ex.Name = exerciseRequest.Name;
             ex.Id = Guid.NewGuid();
