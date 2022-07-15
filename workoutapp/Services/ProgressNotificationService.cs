@@ -3,14 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using MimeKit;
 using MimeKit.Text;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using VirtualDesk.Contracts.Requests;
 using VirtualDesk.Models;
 using workoutapp.Data;
-using workoutapp.Models;
 
 namespace workoutapp.Services
 {
@@ -36,11 +32,11 @@ namespace workoutapp.Services
             message.Body = new TextPart(TextFormat.Html)
             {
 
-                Text = text.ReadToEnd()
+                Text = await text.ReadToEndAsync()
             };
             using (var emailClient = new SmtpClient())
             {
-                emailClient.Connect(EmailConfiguration.SmtpServer, EmailConfiguration.SmtpPort, true);
+                emailClient.Connect(EmailConfiguration.SmtpServer, EmailConfiguration.SmtpPort, false);
                 emailClient.AuthenticationMechanisms.Remove("XOAUTH2");
                 emailClient.Authenticate(EmailConfiguration.SmtpUsername, EmailConfiguration.SmtpPassword);
                 emailClient.Send(message);
@@ -51,26 +47,26 @@ namespace workoutapp.Services
 
         public async Task<bool> ProgressMessagesAsync()
         {
-            
+
             StreamReader text = new("Sample.txt");
             var mail = await DbContext.emailAccountLists.ToListAsync();
             InternetAddressList list = new();
             for (int i = 0; i < mail.Count; i++)
             {
-                list.Add(new MailboxAddress(mail[i].Name,mail[i].Address));
+                list.Add(new MailboxAddress(mail[i].Name, mail[i].Address));
             }
             var message = new MimeMessage();
             message.To.AddRange(list);
-            message.From.Add(new MailboxAddress("WorkoutApp", "remik"));
+            message.From.Add(new MailboxAddress("WorkoutApp", "remikr40000@gmail.com"));
             message.Subject = "To twoje wyniki !";
             message.Body = new TextPart(TextFormat.Html)
             {
 
-                Text = text.ReadToEnd()
+                Text = await text.ReadToEndAsync()
             };
             using (var emailClient = new SmtpClient())
             {
-                emailClient.Connect(EmailConfiguration.SmtpServer, EmailConfiguration.SmtpPort, true);
+                emailClient.Connect(EmailConfiguration.SmtpServer, EmailConfiguration.SmtpPort, false);
                 emailClient.AuthenticationMechanisms.Remove("XOAUTH2");
                 emailClient.Authenticate(EmailConfiguration.SmtpUsername, EmailConfiguration.SmtpPassword);
                 emailClient.Send(message);
