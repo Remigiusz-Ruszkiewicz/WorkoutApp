@@ -56,6 +56,8 @@ namespace workoutapp
                         Url = new Uri("https://example.com/license"),
                     }
                 });
+                //var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                //c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
