@@ -11,14 +11,28 @@ using workoutapp.Services;
 
 namespace workoutapp.Controllers
 {
+    /// <summary>
+    /// ExerciseController
+    /// </summary>
     public class ExerciseController : Controller
     {
+        /// <summary>
+        /// Konstruktor ExerciseController
+        /// </summary>
+        /// <param name="exerciseService"></param>
         public ExerciseController(IExerciseService exerciseService)
         {
             ExerciseService = exerciseService;
         }
 
+        /// <summary>
+        /// IExerciseService
+        /// </summary>
         public IExerciseService ExerciseService { get; }
+        /// <summary>
+        /// Dodawanie ćwiczenia
+        /// </summary>
+        /// <param name="exerciseRequest"></param>
         [AllowAnonymous]
         [HttpPost(ApiRoutes.Exercise.AddExercise)]
         public async Task<IActionResult> AddExercise([FromBody] Exercise exerciseRequest)
@@ -26,6 +40,9 @@ namespace workoutapp.Controllers
             var exerciseresult = await ExerciseService.AddExerciseAsync(exerciseRequest);
             return Ok(exerciseresult);
         }
+        /// <summary>
+        /// Pobieranie listy ćwiczeń
+        /// </summary>
         [AllowAnonymous]
         [HttpGet(ApiRoutes.Exercise.GetAllExercises)]
         public async Task<IActionResult> GetAllExercises()
@@ -33,6 +50,10 @@ namespace workoutapp.Controllers
             var exercises = await ExerciseService.GetExercisesAsync();
             return Ok(exercises);
         }
+        /// <summary>
+        /// Pobieranie ćwiczenia po id
+        /// </summary>
+        /// <param name="id"></param>
         [AllowAnonymous]
         [HttpGet(ApiRoutes.Exercise.GetExerciseById)]
         public async Task<IActionResult> GetExerciseById([FromRoute] Guid id)
@@ -44,12 +65,17 @@ namespace workoutapp.Controllers
             }
             return Ok(exercise);
         }
+        /// <summary>
+        /// Aktualizacja ćwiczenia
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="exercise"></param>
         [AllowAnonymous]
         [HttpPost(ApiRoutes.Exercise.UpdateExercise)]
-        public async Task<IActionResult> UpdateExercise([FromRoute]Guid id,[FromBody] Exercise exercise)
+        public async Task<IActionResult> UpdateExercise([FromRoute] Guid id, [FromBody] Exercise exercise)
         {
             var exercisename = await ExerciseService.GetExerciseByIdAsync(id);
-            if (exercisename==null)
+            if (exercisename == null)
             {
                 return NotFound();
             }
@@ -58,6 +84,10 @@ namespace workoutapp.Controllers
             var exerciseresult = await ExerciseService.EditExerciseAsync(exercisename);
             return Ok(exerciseresult);
         }
+        /// <summary>
+        /// Usuwanie ćwiczenia
+        /// </summary>
+        /// <param name="id"></param>
         [AllowAnonymous]
         [HttpDelete(ApiRoutes.Exercise.DeleteExercise)]
         public async Task<IActionResult> DeleteExercise([FromRoute] Guid id)

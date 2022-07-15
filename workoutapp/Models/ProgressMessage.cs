@@ -6,6 +6,9 @@ using VirtualDesk.Models;
 
 namespace workoutapp.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ProgressMessage
     {
         //public ProgressMessage()

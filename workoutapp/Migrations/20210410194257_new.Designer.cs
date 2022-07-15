@@ -8,10 +8,14 @@ using workoutapp.Data;
 
 namespace workoutapp.Migrations
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [DbContext(typeof(DataContext))]
     [Migration("20210410194257_new")]
     partial class @new
     {
+        /// <inheritdoc/>
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618

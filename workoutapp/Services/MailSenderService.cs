@@ -13,15 +13,33 @@ using workoutapp.Data;
 
 namespace VirtualDesk.Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class MailSenderService : IMailSenderService
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="emailConfiguration"></param>
+        /// <param name="dbContext"></param>
         public MailSenderService(IEmailConfiguration emailConfiguration, DataContext dbContext)
         {
             _emailConfiguration = emailConfiguration;
             DbContext = dbContext;
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public IEmailConfiguration _emailConfiguration { get; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DataContext DbContext { get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="emailAccountList"></param>
         public async Task<EmailAccountList> AddContactAsync(EmailAccountList emailAccountList)
         {
             emailAccountList.Id = Guid.NewGuid();
@@ -30,6 +48,10 @@ namespace VirtualDesk.Services
             var emailToReturn = await GetContactByIdAsync(emailAccountList.Id);
             return emailToReturn;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         public async Task<bool> DeleteContactAsync(Guid id)
         {
             var account = await DbContext.emailAccountLists.SingleOrDefaultAsync(x => x.Id == id);
@@ -39,19 +61,34 @@ namespace VirtualDesk.Services
             await DbContext.SaveChangesAsync();
             return true;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         public async Task<AccountsList> GetAccountByIdAsync(Guid id)
         {
             return await DbContext.accountsLists.SingleOrDefaultAsync(x => x.Id == id);
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public async Task<ICollection<EmailAccountList>> GetAllContactsAsync()
         {
             var result = await DbContext.emailAccountLists.ToListAsync();
             return result;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         public async Task<EmailAccountList> GetContactByIdAsync(Guid id)
         {
             return await DbContext.emailAccountLists.SingleOrDefaultAsync(x => x.Id == id);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="accountsList"></param>
         public async Task<AccountsList> AddAccountAsync(AccountsList accountsList)
         {
             accountsList.Id = Guid.NewGuid();
@@ -60,6 +97,11 @@ namespace VirtualDesk.Services
             var accountToReturn = await GetAccountByIdAsync(accountsList.Id);
             return accountToReturn;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sendMailByIdRequest"></param>
+        /// <param name="id"></param>
         public async Task<bool> MailSendFromContactAsync(SendMailByIdRequest sendMailByIdRequest, Guid id)
         {
             var mail = await DbContext.emailAccountLists.SingleOrDefaultAsync(x => x.Id == id);
@@ -81,12 +123,19 @@ namespace VirtualDesk.Services
             }
             return true;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="emailAccountList"></param>
         public async Task<EmailAccountList> UpdateContactAsync(EmailAccountList emailAccountList)
         {
             DbContext.emailAccountLists.Update(emailAccountList);
             await DbContext.SaveChangesAsync();
             return emailAccountList;
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public int CheckMailQuantity()
         {
             using (var emailClient = new Pop3Client())
@@ -140,6 +189,12 @@ namespace VirtualDesk.Services
             }
             return true;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sendMailByIdRequest"></param>
+        /// <param name="id"></param>
+        /// <param name="loginId"></param>
         public async Task<bool> MailSendByAccAndContAsync(SendMailByIdRequest sendMailByIdRequest, Guid id, Guid loginId)
         {
             var mail = await DbContext.emailAccountLists.SingleOrDefaultAsync(x => x.Id == id);
@@ -162,12 +217,19 @@ namespace VirtualDesk.Services
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public async Task<ICollection<AccountsList>> GetAllAccountsAsync()
         {
             var result = await DbContext.accountsLists.ToListAsync();
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="accountsList"></param>
         public async Task<AccountsList> UpdateAccountAsync(AccountsList accountsList)
         {
             DbContext.accountsLists.Update(accountsList);
@@ -175,6 +237,10 @@ namespace VirtualDesk.Services
             return accountsList;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         public async Task<bool> DeleteAccountAsync(Guid id)
         {
             var account = await DbContext.accountsLists.SingleOrDefaultAsync(x => x.Id == id);
@@ -185,6 +251,11 @@ namespace VirtualDesk.Services
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="maxCount"></param>
         public async Task<List<EmailMessage>> MailGetByAcc(Guid id, int maxCount = 10)
         {
             var mail = await DbContext.accountsLists.SingleOrDefaultAsync(x => x.Id == id);

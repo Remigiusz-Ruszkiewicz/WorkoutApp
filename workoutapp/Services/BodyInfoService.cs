@@ -9,15 +9,29 @@ using workoutapp.Models;
 
 namespace workoutapp.Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BodyInfoService : IBodyInfoService
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dbContext"></param>
         public BodyInfoService(DataContext dbContext)
         {
             DbContext = dbContext;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DataContext DbContext { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bodyFatCalculator"></param>
         public async Task<BodyFatCalculator> AddBodyFatCalculation(BodyFatCalculator bodyFatCalculator)
         {
             bodyFatCalculator.Date = DateTime.Now;
@@ -44,6 +58,10 @@ namespace workoutapp.Services
             return bodyFatCalculator;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bodyMeasure"></param>
         public async Task<BodyMeasure> AddBodyMeasureAsync(BodyMeasure bodyMeasure)
         {
             bodyMeasure.Id = Guid.NewGuid();
@@ -54,12 +72,19 @@ namespace workoutapp.Services
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public async Task<ICollection<BMICalculator>> BmiResultAllAsync()
         {
             var result = await DbContext.BMIResults.ToListAsync();
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="BMIRequest"></param>
         public async Task<double> BMIResultAsync(BMIRequest BMIRequest)
         {
             BMICalculator calc = new() { Date = DateTime.Now, Id = Guid.NewGuid(), Height = BMIRequest.height , Weight = BMIRequest.weight };
@@ -76,12 +101,18 @@ namespace workoutapp.Services
             return Bmi;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public async Task<ICollection<BodyFatCalculator>> GetAllBodyFatCalculations()
         {
             var result = await DbContext.BodyFatCalculator.ToListAsync();
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public async Task<ICollection<BodyMeasure>> GetAllBodyMeasuresAsync()
         {
             var result = await DbContext.BodyMeasure.ToListAsync();

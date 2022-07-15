@@ -10,17 +10,35 @@ using workoutapp.Data;
 
 namespace workoutapp.Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ProgressNotificationService : IProgressNotificationService
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="emailConfiguration"></param>
+        /// <param name="dbContext"></param>
         public ProgressNotificationService(IEmailConfiguration emailConfiguration, DataContext dbContext)
         {
             EmailConfiguration = emailConfiguration;
             DbContext = dbContext;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IEmailConfiguration EmailConfiguration { get; }
+        /// <summary>
+        /// 
+        /// </summary>
         public DataContext DbContext { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         public async Task<bool> ProgressMessageAsync(Guid id)
         {
             StreamReader text = new("Sample.txt");
@@ -45,6 +63,9 @@ namespace workoutapp.Services
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public async Task<bool> ProgressMessagesAsync()
         {
 

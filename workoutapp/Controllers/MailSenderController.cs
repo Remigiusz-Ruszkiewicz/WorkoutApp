@@ -13,15 +13,29 @@ using workoutapp.Contracts;
 
 namespace VirtualDesk.Controllers
 {
+    /// <summary>
+    /// Kontroler do Wysyłania Maili
+    /// </summary>
     [ApiController]
     public class MailSenderController : ControllerBase
     {
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="mailSenderService"></param>
+        /// <param name="emailConfiguration"></param>
         public MailSenderController(IMailSenderService mailSenderService, IEmailConfiguration emailConfiguration)
         {
             MailSenderService = mailSenderService;
             _emailConfiguration = emailConfiguration;
         }
+        /// <summary>
+        /// Email Configuration
+        /// </summary>
         public IEmailConfiguration _emailConfiguration;
+        /// <summary>
+        /// Interface IMailSenderService
+        /// </summary>
         public IMailSenderService MailSenderService { get; }
 
         /// <summary>
@@ -29,17 +43,19 @@ namespace VirtualDesk.Controllers
         /// </summary>
         [AllowAnonymous]
         [HttpPost(ApiRoutes.MailSender.MailSend)]
-        public IActionResult Send([FromBody]EmailMessage emailMessage)
+        public IActionResult Send([FromBody] EmailMessage emailMessage)
         {
             var result = MailSenderService.MailSend(emailMessage);
             return Ok(result);
         }
         /// <summary>
-        /// Wysyła wiadomośc Do osoby z Listy Kontaktów 
+        /// Wysyła wiadomośc Do osoby z Listy Kontaktów
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="sendMailByIdRequest"></param>
         [AllowAnonymous]
         [HttpPost(ApiRoutes.MailSender.MailSendFromContact)]
-        public IActionResult MailSendFromContact([FromRoute] Guid id, [FromBody]SendMailByIdRequest sendMailByIdRequest)
+        public IActionResult MailSendFromContact([FromRoute] Guid id, [FromBody] SendMailByIdRequest sendMailByIdRequest)
         {
             var result = MailSenderService.MailSendFromContactAsync(sendMailByIdRequest, id);
             return Ok(result);
@@ -49,7 +65,7 @@ namespace VirtualDesk.Controllers
         /// </summary>
         [AllowAnonymous]
         [HttpPost(ApiRoutes.MailSender.MailSendByAccAndCont)]
-        public IActionResult MailSendByAccAndCont([FromRoute] Guid id, [FromRoute] Guid loginId, [FromBody]SendMailByIdRequest sendMailByIdRequest)
+        public IActionResult MailSendByAccAndCont([FromRoute] Guid id, [FromRoute] Guid loginId, [FromBody] SendMailByIdRequest sendMailByIdRequest)
         {
             var result = MailSenderService.MailSendByAccAndContAsync(sendMailByIdRequest, id, loginId);
             return Ok(result);
@@ -71,7 +87,7 @@ namespace VirtualDesk.Controllers
         [HttpGet(ApiRoutes.MailSender.MailGetByAcc)]
         public IActionResult ReceiveEmailFromUser([FromRoute] Guid id, int maxCount = 10)
         {
-            var result = MailSenderService.MailGetByAcc(id,maxCount);
+            var result = MailSenderService.MailGetByAcc(id, maxCount);
             return Ok(result);
         }
         /// <summary>
@@ -79,7 +95,7 @@ namespace VirtualDesk.Controllers
         /// </summary>
         [AllowAnonymous]
         [HttpPost(ApiRoutes.MailSender.AddContact)]
-        public async Task<IActionResult> AddContact([FromBody]EmailAccountList emailAccountList)
+        public async Task<IActionResult> AddContact([FromBody] EmailAccountList emailAccountList)
         {
             var product = await MailSenderService.AddContactAsync(emailAccountList);
             return Ok(product);
@@ -99,7 +115,7 @@ namespace VirtualDesk.Controllers
         /// </summary>
         [AllowAnonymous]
         [HttpGet(ApiRoutes.MailSender.GetContactById)]
-        public async Task<IActionResult> GetContactById([FromRoute]Guid id)
+        public async Task<IActionResult> GetContactById([FromRoute] Guid id)
         {
             var product = await MailSenderService.GetContactByIdAsync(id);
             if (product == null)
@@ -113,7 +129,7 @@ namespace VirtualDesk.Controllers
         /// </summary>
         [AllowAnonymous]
         [HttpPut(ApiRoutes.MailSender.UpdateContact)]
-        public async Task<IActionResult> UpdateContact([FromRoute]Guid id, [FromBody]EmailAccountList emailAccountList)
+        public async Task<IActionResult> UpdateContact([FromRoute] Guid id, [FromBody] EmailAccountList emailAccountList)
         {
             var product = await MailSenderService.GetContactByIdAsync(id);
             if (product == null)
@@ -142,7 +158,7 @@ namespace VirtualDesk.Controllers
         /// </summary>
         [AllowAnonymous]
         [HttpPost(ApiRoutes.MailSender.AddAccount)]
-        public async Task<IActionResult> AddAccount([FromBody]AccountsList accountsList)
+        public async Task<IActionResult> AddAccount([FromBody] AccountsList accountsList)
         {
             var product = await MailSenderService.AddAccountAsync(accountsList);
             return Ok(product);
@@ -162,7 +178,7 @@ namespace VirtualDesk.Controllers
         /// </summary>
         [AllowAnonymous]
         [HttpGet(ApiRoutes.MailSender.GetAccountById)]
-        public async Task<IActionResult> GetAccountById([FromRoute]Guid id)
+        public async Task<IActionResult> GetAccountById([FromRoute] Guid id)
         {
             var loginAccount = await MailSenderService.GetAccountByIdAsync(id);
             if (loginAccount == null)
@@ -176,7 +192,7 @@ namespace VirtualDesk.Controllers
         /// </summary>
         [AllowAnonymous]
         [HttpPut(ApiRoutes.MailSender.UpdateAccount)]
-        public async Task<IActionResult> UpdateAccount([FromRoute]Guid id, [FromBody]UpdateAccountListRequest updateAccountListRequest)
+        public async Task<IActionResult> UpdateAccount([FromRoute] Guid id, [FromBody] UpdateAccountListRequest updateAccountListRequest)
         {
             var product = await MailSenderService.GetAccountByIdAsync(id);
             if (product == null)

@@ -9,15 +9,29 @@ using workoutapp.Models;
 
 namespace workoutapp.Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ExerciseService : IExerciseService
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dbcontext"></param>
         public ExerciseService(DataContext dbcontext)
         {
             Dbcontext = dbcontext;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DataContext Dbcontext { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="exerciseRequest"></param>
         public async Task<Exercise> AddExerciseAsync(Exercise exerciseRequest)
         {
             Exercise ex = new();
@@ -30,6 +44,10 @@ namespace workoutapp.Services
             return exercisetoreturn;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         public async Task<bool> DeleteExerciseAsync(Guid id)
         {
             var item = await Dbcontext.exercises.SingleOrDefaultAsync(x => x.Id == id);
@@ -42,6 +60,10 @@ namespace workoutapp.Services
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="exercise"></param>
         public async Task<Exercise> EditExerciseAsync(Exercise exercise)
         {
             Dbcontext.exercises.Update(exercise);
@@ -49,11 +71,18 @@ namespace workoutapp.Services
             return exercise;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
         public async Task<Exercise> GetExerciseByIdAsync(Guid id)
         {
             return await Dbcontext.exercises.SingleOrDefaultAsync(x=>x.Id ==id);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public async Task<ICollection<Exercise>> GetExercisesAsync()
         {
             var result = await Dbcontext.exercises.ToListAsync();
